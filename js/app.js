@@ -1,14 +1,14 @@
-// empployee info
-fetch('https://randomuser.me/api/?results=12&nat=US')
-  //json
+//fetches employee info
+fetch('https://randomuser.me/api/?results=12')
+  //json API data
   .then(response => response.json())
 
   .then(function(users) {
-    //user results
+    //user results from API
     data = users.results;
-    //iterate through employee
+    //iterates through the employees
     data.forEach(employees => {
-      //var for employee
+      //employee attributes/data
       const image = employees.picture.large;
       const firstName = employees.name.first;
       const lastName = employees.name.last;
@@ -16,7 +16,7 @@ fetch('https://randomuser.me/api/?results=12&nat=US')
       const city = employees.location.city;
       const state = employees.location.state;
 
-      //var for profile
+      //employee profile
       const profile = `
         <div class="card">
             <div class="card-img-container">
@@ -28,27 +28,26 @@ fetch('https://randomuser.me/api/?results=12&nat=US')
                     <p class="card-text cap">${city}, ${state}</p>
                 </div>
             </div>`;
-      // append profile to gallery id
+      // appends profile to gallery ID
       $('#gallery').append(profile);
     });
   });
 
-function display(i) {
-  //global var
+function employee(i) {
   const image = data[i].picture.large;
   const firstName = data[i].name.first;
   const lastName = data[i].name.last;
   const email = data[i].email;
-  const city = data[i].location.city.toUpperCase();
-  const state = data[i].location.state.toUpperCase();
+  const city = data[i].location.city;
+  const state = data[i].location.state;
 
   const phone = data[i].phone;
-  const street = data[i].location.street.toUpperCase();
+  const street = data[i].location.street;
   const birthMonth = data[i].dob.date.slice(5, 7);
   const birthDate = data[i].dob.date.slice(8, 10);
   const birthYear = data[i].dob.date.slice(0, 4);
 
-  //html
+  //html modal
   const modal = `
         <div class="modal-container">
             <div class="modal">
@@ -67,13 +66,14 @@ function display(i) {
 
   $('body').append(modal);
 
+  //closes selected employee modal
   $('#modal-close-btn').on('click', function() {
     $('.modal-container').remove();
   });
 }
 
-//modal
+//shows the modal when employee is selected
 $('#gallery').on('click', '.card', function() {
   i = $(this).index();
-  display(i);
+  employee(i);
 });
