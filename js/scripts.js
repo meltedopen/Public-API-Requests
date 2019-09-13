@@ -64,7 +64,9 @@ function viewCard(data) {
                           data[i].name.first
                         } ${data[i].name.last}</h3>
                         <p class="modal-text">${data[i].email}</p>
-                        <p class="modal-text cap">${data[i].location.city}</p>
+                        <p class="modal-text cap">${data[i].location.city}, ${
+          data[i].location.state
+        }</p>
                         <hr>
                         <p class="modal-text">${data[i].cell}</p>
                         <p class="modal-text cap">${data[i].location.street}, ${
